@@ -1,8 +1,8 @@
-[![Build Status](https://circleci.com/gh/segmentio/integration-mixpanel.png)](https://circleci.com/gh/segmentio/integration-mixpanel)
+[![Build Status](https://circleci.com/gh/segmentio/integration-mixpanel/tree/master.png?style=badge)](https://circleci.com/gh/segmentio/integration-mixpanel/tree/master)
 
-# Mixpanel server-side integration.
+# integration-mixpanel
 
-Write me...
+Mixpanel server-side integration for Segment.
 
 
 ## License
