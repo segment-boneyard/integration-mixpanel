@@ -1,0 +1,64 @@
+{
+  "input": {
+    "type": "track",
+    "userId": "user-id",
+    "event": "my-event",
+    "timestamp": "2014",
+    "context": {
+      "library": {
+        "version": "2.0.0",
+        "name": "analytics-android"
+      },
+      "os": {
+        "name": "Android KitKat",
+        "version": "4.4.2"
+      },
+      "device": {
+        "manufacturer": "Samsung",
+        "brand": "generic",
+        "model": "Galaxy Nexus"
+      },
+      "screen": {
+        "density": 480,
+        "height": 1776,
+        "width": 1080
+      },
+      "app": {
+        "version": "2.0.0-SNAPSHOT"
+      },
+      "network": {
+        "cellular": true,
+        "carrier": "Sprint",
+        "wifi": false,
+        "bluetooth": false
+      },
+      "ip": "10.0.0.1"
+    }
+  },
+  "output": {
+    "event": "my-event",
+    "properties": {
+      "mp_lib": "Segment: analytics-android",
+      "$lib_version": "2.0.0",
+      "$os": "Android KitKat",
+      "$os_version": "4.4.2",
+      "$manufacturer": "Samsung",
+      "$brand": "generic",
+      "$model": "Galaxy Nexus",
+      "$screen_dpi": 480,
+      "$screen_height": 1776,
+      "$screen_width": 1080,
+      "$app_version": "2.0.0-SNAPSHOT",
+      "$has_telephone": true,
+      "$carrier": "Sprint",
+      "$wifi": false,
+      "$bluetooth_enabled": false,
+      "ip": "10.0.0.1",
+      "time": 1388534400,
+      "id": "user-id",
+      "token": "89f86c4aa2ce5b74cb47eb5ec95ad1f9",
+      "mp_name_tag": "user-id",
+      "distinct_id": "user-id"
+    }
+  }
+}

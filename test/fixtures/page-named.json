@@ -1,0 +1,35 @@
+{
+  "settings": {
+    "trackNamedPages": true
+  },
+  "input": {
+    "type": "page",
+    "userId": "user-id",
+    "timestamp": "2014",
+    "category": "Docs",
+    "name": "Mixpanel",
+    "properties": {
+      "url": "https://segment.io/docs/integrations/mixpanel/",
+      "property": true
+    },
+    "context": {
+      "ip": "0.0.0.0"
+    }
+  },
+  "output": {
+    "event": "Viewed Docs Mixpanel Page",
+    "properties": {
+      "distinct_id": "user-id",
+      "id": "user-id",
+      "mp_name_tag": "user-id",
+      "category": "Docs",
+      "ip": "0.0.0.0",
+      "name": "Mixpanel",
+      "property": true,
+      "mp_lib": "Segment: unknown",
+      "time": 1388534400,
+      "token": "89f86c4aa2ce5b74cb47eb5ec95ad1f9",
+      "url": "https://segment.io/docs/integrations/mixpanel/"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "input": {
+    "type": "alias",
+    "previousId": "previous-id",
+    "userId": "user-id"
+  },
+  "output": {
+    "event": "$create_alias",
+    "properties": {
+      "alias": "user-id",
+      "distinct_id": "previous-id",
+      "token": "89f86c4aa2ce5b74cb47eb5ec95ad1f9"
+    }
+  }
+}
