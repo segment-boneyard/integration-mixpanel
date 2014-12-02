@@ -26,8 +26,7 @@ describe('Mixpanel', function(){
       .name('Mixpanel')
       .endpoint('https://api.mixpanel.com')
       .ensure('settings.token')
-      .channels(['server'])
-      .retries(2);
+      .channels(['server']);
   });
 
   describe('.validate()', function(){
