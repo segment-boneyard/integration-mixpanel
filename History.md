@@ -1,4 +1,10 @@
 
+1.0.7 / 2015-01-05
+==================
+
+  * Fix created/createdAt date formatting issue
+  * Update tests, fixtures
+
 1.0.6 / 2014-12-08
 ==================
 
