@@ -2,7 +2,7 @@
   "input": {
     "type": "identify",
     "userId": "user-id",
-    "timestamp": "2014",
+    "timestamp": "XXX_GETS_OVERRIDDEN: See spec for details",
     "traits": {
       "company": "Example",
       "firstName": "john",
@@ -19,8 +19,8 @@
   },
   "output": {
     "$distinct_id": "user-id",
-    "$token": "89f86c4aa2ce5b74cb47eb5ec95ad1f9",
-    "$time": 1388534400000,
+    "$token": "50912cd33fd82225ab5ae1c563bd5a7e",
+    "$time": "XXX_GETS_OVERRIDDEN: See spec for details",
     "$set": {
       "company": "Example",
       "$first_name": "john",

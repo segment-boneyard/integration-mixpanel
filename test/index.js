@@ -12,9 +12,9 @@ describe('Mixpanel', function(){
 
   beforeEach(function(){
     settings = {
-      apiKey: 'a0dead853f1a64fe59da98174065442f',
-      secret: '202897e51c36d40a2b9074fc157f1166',
-      token: '89f86c4aa2ce5b74cb47eb5ec95ad1f9',
+      apiKey: 'c31daa4f214e00452a9658cadc5ef6de',
+      secret: '2692184e7c7a4d9a005b12cf4b9fb22c',
+      token: '50912cd33fd82225ab5ae1c563bd5a7e',
       people: true
     };
     mixpanel = new Mixpanel(settings);
@@ -67,7 +67,8 @@ describe('Mixpanel', function(){
     });
 
     it('should send identify correctly', function(done){
-      var json = test.fixture('identify-basic');
+      var json = updateFixtureTimestamp(test.fixture('identify-basic'));
+
       test
         .set(settings)
         .identify(json.input)
@@ -309,4 +310,20 @@ describe('Mixpanel', function(){
 function decode(data){
   var buf = new Buffer(data, 'base64');
   return JSON.parse(buf.toString());
+}
+
+/**
+ * Set a fixture's timestamping to the current date.
+ *
+ * https://mixpanel.com/help/reference/http#storing-user-profiles, $time
+ * section: Updates are stored as events in Mixpanel, which are replayed in
+ * $time order. If you send an update with the same timestamp as an older
+ * update, it won't show up.
+ */
+
+function updateFixtureTimestamp(fixture) {
+  var date = new Date();
+  fixture.input.timestamp = date.toISOString();
+  fixture.output.$time = date.getTime();
+  return fixture;
 }
