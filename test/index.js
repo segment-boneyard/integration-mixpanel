@@ -83,6 +83,18 @@ describe('Mixpanel', function(){
       mixpanel.identify(msg, done);
     });
 
+    it('should send device token correctly', function(done){
+      var json = updateFixtureTimestamp(test.fixture('identify-device-token'));
+
+      test
+        .set(settings)
+        .identify(json.input)
+        .query({ ip: 0, verbose: 1 })
+        .query('data', json.output, decode)
+        .expects(200)
+        .end(done)
+    });
+
     it('should error on invalid request', function(done){
       test
         .set({ apiKey: 'x' })
