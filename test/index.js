@@ -83,12 +83,26 @@ describe('Mixpanel', function(){
       mixpanel.identify(msg, done);
     });
 
-    it('should send device token correctly', function(done){
-      var json = updateFixtureTimestamp(test.fixture('identify-device-token'));
+    it('should send $set correctly when device token is provided', function(done){
+      var json = updateFixtureTimestamp(test.fixture('identify-device-token-set'));
 
       test
         .set(settings)
         .identify(json.input)
+        .request(0)
+        .query({ ip: 0, verbose: 1 })
+        .query('data', json.output, decode)
+        .expects(200)
+        .end(done)
+    });
+
+    it('should send $union correctly when device token is provided', function(done){
+      var json = updateFixtureTimestamp(test.fixture('identify-device-token-union'));
+
+      test
+        .set(settings)
+        .identify(json.input)
+        .request(1)
         .query({ ip: 0, verbose: 1 })
         .query('data', json.output, decode)
         .expects(200)
