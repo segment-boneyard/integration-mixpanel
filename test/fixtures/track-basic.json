@@ -27,6 +27,7 @@
       "email": "jd@example.com",
       "mp_name_tag": "user-id",
       "mp_lib": "Segment: unknown",
+      "query": "analytics",
       "ip": "10.0.0.1",
       "time": 1388534400,
       "id": "user-id",
