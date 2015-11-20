@@ -24,7 +24,8 @@
         "width": 1080
       },
       "app": {
-        "version": "2.0.0-SNAPSHOT"
+        "version": "2.0.0-SNAPSHOT",
+        "build": "1.7.38"
       },
       "network": {
         "cellular": true,
@@ -49,6 +50,7 @@
       "$screen_height": 1776,
       "$screen_width": 1080,
       "$app_version": "2.0.0-SNAPSHOT",
+      "$app_release": "1.7.38",
       "$has_telephone": true,
       "$carrier": "Sprint",
       "$wifi": false,
