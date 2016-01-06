@@ -1,4 +1,10 @@
 
+1.0.12 / 2016-01-06
+===================
+
+  * Merge pull request #12 from segmentio/traits-token
+  * Remap traits.token to not conflict with Mixpanels internal keywords.
+
 1.0.11 / 2015-11-20
 ===================
 
