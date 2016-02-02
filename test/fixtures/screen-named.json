@@ -17,7 +17,7 @@
     }
   },
   "output": {
-    "event": "Viewed Docs Mixpanel Screen",
+    "event": "Viewed Mixpanel Screen",
     "properties": {
       "distinct_id": "user-id",
       "id": "user-id",
