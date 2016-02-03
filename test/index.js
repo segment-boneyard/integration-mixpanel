@@ -216,10 +216,6 @@ describe('Mixpanel', function(){
         .query('verbose', '1')
         .end(function(err, res){
           if (err) return done(err);
-          // TODO: this is awkward, remove this once
-          // we add mutliple request support to tester
-          // and change all integrations to supply an
-          // array of responses to the callback.
           assert.equal(200, res[0].status);
           done();
         });
@@ -236,10 +232,6 @@ describe('Mixpanel', function(){
         .query('verbose', '1')
         .end(function(err, res){
           if (err) return done(err);
-          // TODO: this is awkward, remove this once
-          // we add mutliple request support to tester
-          // and change all integrations to supply an
-          // array of responses to the callback.
           assert.equal(200, res[0].status);
           done();
         });
@@ -256,10 +248,6 @@ describe('Mixpanel', function(){
         .query('verbose', '1')
         .end(function(err, res){
           if (err) return done(err);
-          // TODO: this is awkward, remove this once
-          // we add mutliple request support to tester
-          // and change all integrations to supply an
-          // array of responses to the callback.
           assert.equal(200, res[0].status);
           done();
         });
@@ -278,10 +266,6 @@ describe('Mixpanel', function(){
         .query('verbose', '1')
         .end(function(err, res){
           if (err) return done(err);
-          // TODO: this is awkward, remove this once
-          // we add mutliple request support to tester
-          // and change all integrations to supply an
-          // array of responses to the callback.
           assert.equal(200, res[0].status);
           done();
         });
@@ -298,10 +282,6 @@ describe('Mixpanel', function(){
         .query('verbose', '1')
         .end(function(err, res){
           if (err) return done(err);
-          // TODO: this is awkward, remove this once
-          // we add mutliple request support to tester
-          // and change all integrations to supply an
-          // array of responses to the callback.
           assert.equal(200, res[0].status);
           done();
         });
@@ -318,10 +298,6 @@ describe('Mixpanel', function(){
         .query('verbose', '1')
         .end(function(err, res){
           if (err) return done(err);
-          // TODO: this is awkward, remove this once
-          // we add mutliple request support to tester
-          // and change all integrations to supply an
-          // array of responses to the callback.
           assert.equal(200, res[0].status);
           done();
         });
