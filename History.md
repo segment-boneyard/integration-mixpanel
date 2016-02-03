@@ -1,4 +1,10 @@
 
+1.0.13 / 2016-02-03
+===================
+
+  * map to way more context props and traits refractor some functions
+  * fix multiple page calls issue
+
 1.0.12 / 2016-01-06
 ===================
 
