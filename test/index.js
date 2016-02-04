@@ -259,6 +259,22 @@ describe('Mixpanel', function(){
           done();
         });
     });
+
+    it('should not send any requests for disabled pages', function(done){
+      var json = test.fixture('page-named');
+      test
+       .set({
+        trackCategorizedPages: false,
+        trackNamedPages: false,
+        trackAllPages: false
+       })
+       .page(json.input)
+       .end(function(err, res){
+          if (err) return done(err);
+          assert(test.reqs.length == 0);
+          done();
+       });
+    })
   });
 
   describe('.screen()', function(){
@@ -309,6 +325,22 @@ describe('Mixpanel', function(){
           done();
         });
     });
+
+    it('should not send any requests for disabled screens', function(done){
+      var json = test.fixture('screen-named');
+      test
+       .set({
+        trackCategorizedPages: false,
+        trackNamedPages: false,
+        trackAllPages: false
+       })
+       .page(json.input)
+       .end(function(err, res){
+          if (err) return done(err);
+          assert(test.reqs.length == 0);
+          done();
+       });
+    })
   });
 });
 
