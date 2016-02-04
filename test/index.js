@@ -54,6 +54,13 @@ describe('Mixpanel', function(){
     it('should be valid when all settings are given', function(){
       test.valid({}, settings);
     });
+
+    it('should be invalid for messages with a timestamp older than five years', function(){
+      test.invalid({
+        type: 'track',
+        timestamp: new Date('5/10/2010')
+      }, settings);
+    });
   });
 
   describe('.identify()', function(){
