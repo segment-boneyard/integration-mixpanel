@@ -4,8 +4,8 @@
   },
   "input": {
     "type": "screen",
-    "userId": "user-id",
-    "timestamp": "2014",
+    "userId": "999999",
+    "timestamp": "2016",
     "category": "Docs",
     "name": "Mixpanel",
     "properties": {
@@ -19,15 +19,15 @@
   "output": {
     "event": "Viewed Mixpanel Screen",
     "properties": {
-      "distinct_id": "user-id",
-      "id": "user-id",
-      "mp_name_tag": "user-id",
+      "distinct_id": "999999",
+      "id": "999999",
+      "mp_name_tag": "999999",
       "category": "Docs",
       "ip": "0.0.0.0",
       "name": "Mixpanel",
       "property": true,
       "mp_lib": "Segment: unknown",
-      "time": 1388534400,
+      "time": 1451606400,
       "token": "50912cd33fd82225ab5ae1c563bd5a7e",
       "url": "https://segment.io/docs/integrations/mixpanel/"
     }

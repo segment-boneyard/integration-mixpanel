@@ -1,12 +1,12 @@
 {
   "input": {
     "type": "identify",
-    "userId": "user-id",
+    "userId": "999999",
     "timestamp": "XXX_GETS_OVERRIDDEN: See spec for details",
     "traits": {
       "company": "Example",
-      "firstName": "john",
-      "lastName": "doe",
+      "firstName": "Lucius",
+      "lastName": "Severus",
       "met": "2014-01-01",
       "created": "2013-01-01",
       "phone": "555555",
@@ -21,7 +21,7 @@
     }
   },
   "output": {
-    "$distinct_id": "user-id",
+    "$distinct_id": "999999",
     "$token": "50912cd33fd82225ab5ae1c563bd5a7e",
     "$time": "XXX_GETS_OVERRIDDEN: See spec for details",
     "$union": {

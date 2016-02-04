@@ -4,19 +4,19 @@
   },
   "input": {
     "type": "page",
-    "userId": "user-id",
-    "timestamp": "2014",
+    "userId": "999999",
+    "timestamp": "2016",
     "properties": {},
     "context": {}
   },
   "output": {
     "event": "Loaded a Page",
     "properties": {
-      "distinct_id": "user-id",
-      "id": "user-id",
-      "mp_name_tag": "user-id",
+      "distinct_id": "999999",
+      "id": "999999",
+      "mp_name_tag": "999999",
       "mp_lib": "Segment: unknown",
-      "time": 1388534400,
+      "time": 1451606400,
       "token": "50912cd33fd82225ab5ae1c563bd5a7e"
     }
   }

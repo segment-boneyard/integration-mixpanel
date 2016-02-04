@@ -1,9 +1,9 @@
 {
   "input": {
     "type": "track",
-    "userId": "user-id",
-    "event": "my-event",
-    "timestamp": "2014",
+    "userId": "999999",
+    "event": "HELLO6",
+    "timestamp": "2016",
     "context": {
       "app": {
       "name": "InitechGlobal",
@@ -71,18 +71,18 @@
     }
   },
   "output": {
-    "event": "my-event",
+    "event": "HELLO6",
     "properties": { 
       "$app_release": "3.0.1.545",
       "$app_version": "545",
       "$current_url": "https://segment.com/academy/",
       "$device": "maguro",
-      "distinct_id": "user-id",
+      "distinct_id": "999999",
       "ip": "8.8.8.8",
       "mp_lib": "Segment: analytics.js",
-      "time": 1388534400,
+      "time": 1451606400,
       "token": "50912cd33fd82225ab5ae1c563bd5a7e",
-      "mp_name_tag": "user-id",
+      "mp_name_tag": "999999",
       "$browser": "Mobile Safari",
       "$browser_version": "9.0",
       "$carrier": "T-Mobile NL",
@@ -98,12 +98,11 @@
       "$ios_app_release": "3.0.1.545",
       "$ios_app_version": "545",
       "$ios_version": "8.1.3",
-      "utm_name": "TPS Innovation Newsletter",
       "utm_source": "Newsletter",
       "utm_medium": "email",
       "utm_term": "tps reports",
       "utm_content": "image link",
-      "id": "user-id"
+      "id": "999999"
     }
   }
 }
