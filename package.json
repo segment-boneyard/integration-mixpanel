@@ -1,6 +1,6 @@
 {
   "name": "integration-mixpanel",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "private": true,
   "description": "Mixpanel server-side integration",
   "author": "Segment <friends@segment.com>",
