@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "batch": "^0.5.1",
-    "convert-dates": "^0.1.1",
     "extend": "^2.0.0",
     "is": "^2.1.0",
     "lodash.foreach": "^2.4.1",
@@ -26,8 +25,11 @@
     "unix-time": "^1.0.1"
   },
   "devDependencies": {
+    "@segment/eslint-config": "^3.0.0",
+    "eslint": "^2.8.0",
+    "eslint-plugin-mocha": "^2.2.0",
+    "eslint-plugin-require-path-exists": "^1.1.5",
     "istanbul": "0.x",
-    "jscs": "1.x",
     "merge-util": "^0.1.0",
     "mocha": "2.x",
     "ms": "0.x",
