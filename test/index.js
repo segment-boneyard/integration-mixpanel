@@ -1,16 +1,17 @@
+'use strict';
 
 var Test = require('segmentio-integration-tester');
-var helpers = require('./helpers');
 var assert = require('assert');
 var time = require('unix-time');
+var helpers = require('./helpers');
 var Mixpanel = require('..');
 
-describe('Mixpanel', function(){
+describe('Mixpanel', function() {
   var mixpanel;
   var settings;
   var test;
 
-  beforeEach(function(){
+  beforeEach(function() {
     settings = {
       apiKey: 'c31daa4f214e00452a9658cadc5ef6de',
       secret: '2692184e7c7a4d9a005b12cf4b9fb22c',
@@ -21,7 +22,7 @@ describe('Mixpanel', function(){
     test = Test(mixpanel, __dirname);
   });
 
-  it('should have correct settings', function(){
+  it('should have correct settings', function() {
     test
       .name('Mixpanel')
       .endpoint('https://api.mixpanel.com')
@@ -29,13 +30,13 @@ describe('Mixpanel', function(){
       .channels(['server']);
   });
 
-  describe('.validate()', function(){
-    it('should be invalid when .token is missing', function(){
+  describe('.validate()', function() {
+    it('should be invalid when .token is missing', function() {
       delete settings.token;
       test.invalid({}, settings);
     });
 
-    it('should be invalid for old "track" messages without .apiKey', function(){
+    it('should be invalid for old "track" messages without .apiKey', function() {
       delete settings.apiKey;
       test.invalid({
         type: 'track',
@@ -43,7 +44,7 @@ describe('Mixpanel', function(){
       }, settings);
     });
 
-    it('should be valid for new "track" messages without .apiKey', function(){
+    it('should be valid for new "track" messages without .apiKey', function() {
       delete settings.apiKey;
       test.valid({
         type: 'track',
@@ -51,11 +52,11 @@ describe('Mixpanel', function(){
       }, settings);
     });
 
-    it('should be valid when all settings are given', function(){
+    it('should be valid when all settings are given', function() {
       test.valid({}, settings);
     });
 
-    it('should be invalid for messages with a timestamp older than five years', function(){
+    it('should be invalid for messages with a timestamp older than five years', function() {
       test.invalid({
         type: 'track',
         timestamp: new Date('5/10/2010')
@@ -63,17 +64,17 @@ describe('Mixpanel', function(){
     });
   });
 
-  describe('.identify()', function(){
-    it('should do nothing if `.people` is false', function(done){
+  describe('.identify()', function() {
+    it('should do nothing if `.people` is false', function(done) {
       var msg = helpers.identify();
       mixpanel.settings.people = false;
-      mixpanel.identify(msg, function(){
+      mixpanel.identify(msg, function() {
         assert.equal(0, arguments.length);
         done();
       });
     });
 
-    it('should send identify correctly', function(done){
+    it('should send identify correctly', function(done) {
       var json = updateFixtureTimestamp(test.fixture('identify-basic'));
 
       test
@@ -85,12 +86,12 @@ describe('Mixpanel', function(){
         .end(done);
     });
 
-    it('should be able to identify correctly', function(done){
+    it('should be able to identify correctly', function(done) {
       var msg = helpers.identify();
       mixpanel.identify(msg, done);
     });
 
-    it('should send $set correctly when device token is provided', function(done){
+    it('should send $set correctly when device token is provided', function(done) {
       var json = updateFixtureTimestamp(test.fixture('identify-device-token-set'));
 
       test
@@ -100,10 +101,10 @@ describe('Mixpanel', function(){
         .query({ ip: 0, verbose: 1 })
         .query('data', json.output, decode)
         .expects(200)
-        .end(done)
+        .end(done);
     });
 
-    it('should send $union correctly when device token is provided', function(done){
+    it('should send $union correctly when device token is provided', function(done) {
       var json = updateFixtureTimestamp(test.fixture('identify-device-token-union'));
 
       test
@@ -113,21 +114,21 @@ describe('Mixpanel', function(){
         .query({ ip: 0, verbose: 1 })
         .query('data', json.output, decode)
         .expects(200)
-        .end(done)
+        .end(done);
     });
 
-    it('should error on invalid request', function(done){
+    it('should error on invalid request', function(done) {
       test
         .set({ apiKey: 'x' })
         .set({ secret: 'x' })
         .set({ token: 'x' })
         .identify({})
-        .error('Mixpanel: $distinct_id, missing or empty', done);
+        .error('$distinct_id, missing or empty', done);
     });
   });
 
-  describe('.track()', function(){
-    it('should send track correctly', function(done){
+  describe('.track()', function() {
+    it('should send track correctly', function(done) {
       var json = test.fixture('track-basic');
       var date = json.input.timestamp = new Date();
       json.output.properties.time = time(date);
@@ -138,7 +139,7 @@ describe('Mixpanel', function(){
         .query({ api_key: settings.apiKey })
         .query({ verbose: '1' })
         .query('data', json.output, decode)
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(1, res.length);
           assert.equal(200, res[0].status);
@@ -146,7 +147,7 @@ describe('Mixpanel', function(){
         });
     });
 
-    it('should send track with context correctly', function(done){
+    it('should send track with context correctly', function(done) {
       var json = test.fixture('track-context');
       test
         .set(settings)
@@ -155,7 +156,7 @@ describe('Mixpanel', function(){
         .query({ api_key: settings.apiKey })
         .query({ verbose: '1' })
         .query('data', json.output, decode)
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(1, res.length);
           assert.equal(200, res[0].status);
@@ -163,21 +164,21 @@ describe('Mixpanel', function(){
         });
     });
 
-    it('should be able to track correctly', function(done){
+    it('should be able to track correctly', function(done) {
       mixpanel.track(helpers.track(), done);
     });
 
-    it('should be able to track a bare call', function(done){
+    it('should be able to track a bare call', function(done) {
       mixpanel.track(helpers.track.bare(), done);
     });
 
-    it('should increment', function(done){
+    it('should increment', function(done) {
       var track = helpers.track({ event: 'increment' });
       mixpanel.settings.increments = [track.event()];
       mixpanel.track(track, done);
-    })
+    });
 
-    it('should be able to track ill-formed traits', function(done){
+    it('should be able to track ill-formed traits', function(done) {
       mixpanel.track(helpers.track.bare({
         context: {
           traits: 'aaa'
@@ -186,8 +187,8 @@ describe('Mixpanel', function(){
     });
   });
 
-  describe('.alias()', function(){
-    it('should be able to alias properly', function(done){
+  describe('.alias()', function() {
+    it('should be able to alias properly', function(done) {
       var json = test.fixture('alias-basic');
       test
         .set(settings)
@@ -201,18 +202,18 @@ describe('Mixpanel', function(){
     });
 
 
-    it('should error on invalid request', function(done){
+    it('should error on invalid request', function(done) {
       test
         .set({ apiKey: 'x' })
         .set({ secret: 'x' })
         .set({ token: 'x' })
         .alias({})
-        .error('Mixpanel: distinct_id, missing or empty', done);
+        .error('distinct_id, missing or empty', done);
     });
   });
 
-  describe('.page()', function(){
-    it('should be able to track all pages', function(done){
+  describe('.page()', function() {
+    it('should be able to track all pages', function(done) {
       var json = test.fixture('page-all');
       test
         .set(settings)
@@ -221,14 +222,14 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(200, res[0].status);
           done();
         });
     });
 
-    it('should be able to track categorized pages', function(done){
+    it('should be able to track categorized pages', function(done) {
       var json = test.fixture('page-categorized');
       test
         .set(settings)
@@ -237,14 +238,14 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(200, res[0].status);
           done();
         });
     });
 
-    it('should be able to track named pages', function(done){
+    it('should be able to track named pages', function(done) {
       var json = test.fixture('page-named');
       test
         .set(settings)
@@ -253,32 +254,32 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(200, res[0].status);
           done();
         });
     });
 
-    it('should not send any requests for disabled pages', function(done){
+    it('should not send any requests for disabled pages', function(done) {
       var json = test.fixture('page-named');
       test
        .set({
-        trackCategorizedPages: false,
-        trackNamedPages: false,
-        trackAllPages: false
+         trackCategorizedPages: false,
+         trackNamedPages: false,
+         trackAllPages: false
        })
        .page(json.input)
-       .end(function(err, res){
-          if (err) return done(err);
-          assert(test.reqs.length == 0);
-          done();
+       .end(function(err) {
+         if (err) return done(err);
+         assert(test.reqs.length === 0);
+         done();
        });
-    })
+    });
   });
 
-  describe('.screen()', function(){
-    it('should be able to track all screens', function(done){
+  describe('.screen()', function() {
+    it('should be able to track all screens', function(done) {
       var json = test.fixture('screen-all');
       test
         .set(settings)
@@ -287,14 +288,14 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(200, res[0].status);
           done();
         });
     });
 
-    it('should be able to track categorized screen', function(done){
+    it('should be able to track categorized screen', function(done) {
       var json = test.fixture('screen-categorized');
       test
         .set(settings)
@@ -303,14 +304,14 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(200, res[0].status);
           done();
         });
     });
 
-    it('should be able to track named screen', function(done){
+    it('should be able to track named screen', function(done) {
       var json = test.fixture('screen-named');
       test
         .set(settings)
@@ -319,28 +320,28 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
+        .end(function(err, res) {
           if (err) return done(err);
           assert.equal(200, res[0].status);
           done();
         });
     });
 
-    it('should not send any requests for disabled screens', function(done){
+    it('should not send any requests for disabled screens', function(done) {
       var json = test.fixture('screen-named');
       test
        .set({
-        trackCategorizedPages: false,
-        trackNamedPages: false,
-        trackAllPages: false
+         trackCategorizedPages: false,
+         trackNamedPages: false,
+         trackAllPages: false
        })
        .page(json.input)
-       .end(function(err, res){
-          if (err) return done(err);
-          assert(test.reqs.length == 0);
-          done();
+       .end(function(err) {
+         if (err) return done(err);
+         assert(test.reqs.length === 0);
+         done();
        });
-    })
+    });
   });
 });
 
@@ -348,7 +349,7 @@ describe('Mixpanel', function(){
  * Decode base64 and parse json
  */
 
-function decode(data){
+function decode(data) {
   var buf = new Buffer(data, 'base64');
   return JSON.parse(buf.toString());
 }
