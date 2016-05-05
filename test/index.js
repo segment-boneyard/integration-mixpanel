@@ -244,8 +244,40 @@ describe('Mixpanel', function(){
         });
     });
 
+    it('should be able to track categorized pages with generic names', function(done){
+      var json = test.fixture('page-categorized-generic');
+      test
+        .set(settings)
+        .set(json.settings)
+        .page(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
     it('should be able to track named pages', function(done){
       var json = test.fixture('page-named');
+      test
+        .set(settings)
+        .set(json.settings)
+        .page(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
+    it('should be able to track named pages with the generic page name', function(done){
+      var json = test.fixture('page-named-generic');
       test
         .set(settings)
         .set(json.settings)
@@ -310,8 +342,40 @@ describe('Mixpanel', function(){
         });
     });
 
+    it('should be able to track categorized screens with generic names', function(done){
+      var json = test.fixture('screen-categorized-generic');
+      test
+        .set(settings)
+        .set(json.settings)
+        .screen(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
     it('should be able to track named screen', function(done){
       var json = test.fixture('screen-named');
+      test
+        .set(settings)
+        .set(json.settings)
+        .screen(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
+    it('should be able to track named screens with the generic screen name', function(done){
+      var json = test.fixture('screen-named-generic');
       test
         .set(settings)
         .set(json.settings)
