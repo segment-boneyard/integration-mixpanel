@@ -122,7 +122,7 @@ describe('Mixpanel', function(){
         .set({ secret: 'x' })
         .set({ token: 'x' })
         .identify({})
-        .error('Mixpanel: $distinct_id, missing or empty', done);
+        .error('$distinct_id, missing or empty', done);
     });
   });
 
@@ -207,7 +207,7 @@ describe('Mixpanel', function(){
         .set({ secret: 'x' })
         .set({ token: 'x' })
         .alias({})
-        .error('Mixpanel: distinct_id, missing or empty', done);
+        .error('distinct_id, missing or empty', done);
     });
   });
 
