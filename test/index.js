@@ -244,8 +244,8 @@ describe('Mixpanel', function(){
         });
     });
 
-    it('should be able to track categorized pages with generic names', function(done){
-      var json = test.fixture('page-categorized-generic');
+    it('should be able to track categorized pages with consolidated names', function(done){
+      var json = test.fixture('page-categorized-consolidated');
       test
         .set(settings)
         .set(json.settings)
@@ -276,8 +276,8 @@ describe('Mixpanel', function(){
         });
     });
 
-    it('should be able to track named pages with the generic page name', function(done){
-      var json = test.fixture('page-named-generic');
+    it('should be able to track named pages with the consolidated page name', function(done){
+      var json = test.fixture('page-named-consolidated');
       test
         .set(settings)
         .set(json.settings)
@@ -342,8 +342,8 @@ describe('Mixpanel', function(){
         });
     });
 
-    it('should be able to track categorized screens with generic names', function(done){
-      var json = test.fixture('screen-categorized-generic');
+    it('should be able to track categorized screens with consolidated names', function(done){
+      var json = test.fixture('screen-categorized-consolidated');
       test
         .set(settings)
         .set(json.settings)
@@ -374,8 +374,8 @@ describe('Mixpanel', function(){
         });
     });
 
-    it('should be able to track named screens with the generic screen name', function(done){
-      var json = test.fixture('screen-named-generic');
+    it('should be able to track named screens with the consolidated screen name', function(done){
+      var json = test.fixture('screen-named-consolidated');
       test
         .set(settings)
         .set(json.settings)

@@ -1,10 +1,10 @@
 {
   "settings": {
-    "genericPageName": true,
+    "consolidatedPageCalls": true,
     "trackCategorizedPages": true
   },
   "input": {
-    "type": "screen",
+    "type": "page",
     "userId": "999999",
     "timestamp": "2016",
     "category": "Docs",
@@ -17,7 +17,7 @@
     }
   },
   "output": {
-    "event": "Loaded a Screen",
+    "event": "Loaded a Page",
     "properties": {
       "distinct_id": "999999",
       "id": "999999",
