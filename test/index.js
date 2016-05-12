@@ -122,7 +122,7 @@ describe('Mixpanel', function(){
         .set({ secret: 'x' })
         .set({ token: 'x' })
         .identify({})
-        .error('Mixpanel: $distinct_id, missing or empty', done);
+        .error('$distinct_id, missing or empty', done);
     });
   });
 
@@ -207,7 +207,7 @@ describe('Mixpanel', function(){
         .set({ secret: 'x' })
         .set({ token: 'x' })
         .alias({})
-        .error('Mixpanel: distinct_id, missing or empty', done);
+        .error('distinct_id, missing or empty', done);
     });
   });
 
@@ -244,8 +244,40 @@ describe('Mixpanel', function(){
         });
     });
 
+    it('should be able to track categorized pages with consolidated names', function(done){
+      var json = test.fixture('page-categorized-consolidated');
+      test
+        .set(settings)
+        .set(json.settings)
+        .page(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
     it('should be able to track named pages', function(done){
       var json = test.fixture('page-named');
+      test
+        .set(settings)
+        .set(json.settings)
+        .page(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
+    it('should be able to track named pages with the consolidated page name', function(done){
+      var json = test.fixture('page-named-consolidated');
       test
         .set(settings)
         .set(json.settings)
@@ -310,8 +342,40 @@ describe('Mixpanel', function(){
         });
     });
 
+    it('should be able to track categorized screens with consolidated names', function(done){
+      var json = test.fixture('screen-categorized-consolidated');
+      test
+        .set(settings)
+        .set(json.settings)
+        .screen(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
     it('should be able to track named screen', function(done){
       var json = test.fixture('screen-named');
+      test
+        .set(settings)
+        .set(json.settings)
+        .screen(json.input)
+        .query('data', json.output, decode)
+        .query('api_key', settings.apiKey)
+        .query('verbose', '1')
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
+    it('should be able to track named screens with the consolidated screen name', function(done){
+      var json = test.fixture('screen-named-consolidated');
       test
         .set(settings)
         .set(json.settings)
