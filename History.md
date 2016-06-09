@@ -1,8 +1,12 @@
+2.0.0 / 2016-06-09
+===================
+
+  * versioned integration
 
 1.0.19 / 2016-05-12
 ===================
-  
-  * Add logic to support consolidatedPageCalls settings for Mixpanel 
+
+  * Add logic to support consolidatedPageCalls settings for Mixpanel
 
 1.0.18 / 2016-03-02
 ===================
