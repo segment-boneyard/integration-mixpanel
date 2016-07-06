@@ -1,7 +1,8 @@
-2.0.0 / 2016-06-09
-===================
 
-  * versioned integration
+1.0.2 / 2016-07-06
+==================
+
+  * allow bypassing of last seen when tracking revenue
 
 1.0.19 / 2016-05-12
 ===================
