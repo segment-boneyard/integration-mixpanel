@@ -146,6 +146,52 @@ describe('Mixpanel', function(){
         });
     });
 
+    it('should send revenue correctly', function(done){
+      var json = test.fixture('track-revenue');
+      var timestamp = json.input.timestamp = new Date();
+      json.output.$append.$transactions.$time = timestamp.toISOString().slice(0,19);
+      
+      var suite = test
+        .requests(2) // total number of requests
+        .set(settings)
+        .set({ people: false })
+        .track(json.input);
+
+      suite
+        .request(1) // second request
+        .query({ verbose: '1' })
+        .query({ ip: '0' })
+        .query('data', json.output, decode)
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
+    it('should not send last seen with revenue if active flag is false', function(done){
+      var json = test.fixture('track-ignore-time-with-revenue');
+      var timestamp = json.input.timestamp = new Date();
+      json.output.$append.$transactions.$time = timestamp.toISOString().slice(0,19);
+      
+      var suite = test
+        .requests(2) // total number of requests
+        .set(settings)
+        .set({ people: false })
+        .track(json.input);
+
+      suite
+        .request(1) // second request
+        .query({ verbose: '1' })
+        .query({ ip: '0' })
+        .query('data', json.output, decode)
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
     it('should send track with context correctly', function(done){
       var json = test.fixture('track-context');
       test
@@ -163,10 +209,12 @@ describe('Mixpanel', function(){
         });
     });
 
+    // TODO: why are these tests not checking output payload?
     it('should be able to track correctly', function(done){
       mixpanel.track(helpers.track(), done);
     });
 
+    // TODO: why are these tests not checking output payload?
     it('should be able to track a bare call', function(done){
       mixpanel.track(helpers.track.bare(), done);
     });
