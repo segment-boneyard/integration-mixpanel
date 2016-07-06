@@ -1,5 +1,5 @@
 
-1.0.2 / 2016-07-06
+1.0.20 / 2016-07-06
 ==================
 
   * allow bypassing of last seen when tracking revenue
