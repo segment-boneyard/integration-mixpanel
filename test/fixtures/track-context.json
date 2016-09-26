@@ -72,7 +72,7 @@
   },
   "output": {
     "event": "HELLO6",
-    "properties": { 
+    "properties": {
       "$app_release": "3.0.1.545",
       "$app_version": "545",
       "$current_url": "https://segment.com/academy/",
@@ -84,7 +84,7 @@
       "token": "50912cd33fd82225ab5ae1c563bd5a7e",
       "mp_name_tag": "999999",
       "$browser": "Mobile Safari",
-      "$browser_version": "9.0",
+      "$browser_version": 9,
       "$carrier": "T-Mobile NL",
       "$manufacturer": "Apple",
       "$model": "iPhone7,2",

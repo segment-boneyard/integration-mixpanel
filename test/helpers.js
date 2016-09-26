@@ -1,8 +1,6 @@
 
 var facade = require('segmentio-facade');
 var merge = require('merge-util');
-var join = require('path').join;
-var assert = require('assert');
 var uid = require('uid');
 
 /**
@@ -13,71 +11,6 @@ var firstId  = uid();
 var secondId = uid();
 var groupId  = uid();
 var email = 'testing-' + firstId + '@segment.io';
-
-/**
- * Mapper tester.
- *
- * @param {String} dirname
- * @return {Function}
- */
-
-exports.mapper = function(dirname){
-  assert(dirname, '__dirname must be supplied');
-  dirname = join(dirname, 'fixtures');
-  return function(integration){
-    integration.fixture = function(name, settings){
-      var dir = join(dirname, name + '.json');
-      var json = require(dir);
-      var input = json.input;
-      var output = json.output;
-      var type = input.type[0].toUpperCase() + input.type.slice(1);
-      var Type = facade[type];
-      var map = integration.mapper[input.type];
-      var mapped = map.call(integration, new Type(input), settings || {});
-      mapped = JSON.parse(JSON.stringify(mapped)); // dates
-      mapped.should.eql(output);
-    };
-  };
-};
-
-/**
- * Create ecommerce transaction.
- *
- * @param {Object} options
- * @return {Track}
- */
-
-exports.transaction = function(options){
-  return new facade.Track(merge({
-    userId: firstId,
-    channel: 'server',
-    timestamp: new Date,
-    event: 'Completed Order',
-    properties: {
-      orderId: 't-39a224df',
-      total: 99.99,
-      shipping: 13.99,
-      tax: 20.99,
-      products: [{
-        quantity: 1,
-        price: 24.75,
-        name: 'Sony Pulse',
-        sku: 'p-957c416f',
-        category: 'Entertainment'
-      }, {
-        quantity: 3,
-        price: 24.75,
-        name: 'Sony PS3',
-        sku: 'p-5bd14e17',
-        category: 'Entertainment'
-      }]
-    },
-    options: {
-      ip: '4.184.68.0',
-      userAgent: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)'
-    }
-  }, options));
-};
 
 /**
  * Create a track call merged from `options`
@@ -179,94 +112,4 @@ exports.identify = function (options) {
     timestamp : new Date(),
     channel : 'server'
   }, options));
-};
-
-/**
- * Create a page call merged from `options`
- *
- * @param {Object} options
- * @return {Page}
- */
-
-exports.page = function(options){
-  return new facade.Page(merge({
-    userId: firstId,
-    name: 'Docs',
-    category: 'Support',
-    properties: {
-      url: 'https://segment.io/docs',
-      title: 'Analytics.js - Segment.io'
-    },
-    context: {
-      ip: '12.212.12.49'
-    },
-    timestamp: new Date,
-    channel: 'server'
-  }, options || {}));
-};
-
-/**
- * Create a screen call merged from `options`
- *
- * @param {Object} options
- * @return {Page}
- */
-
-exports.screen = function(options){
-  return new facade.Screen(merge({
-    userId: firstId,
-    name: 'Login',
-    category: 'Authentication',
-    properties: {
-      type: 'Facebook'
-    },
-    context: {
-      ip: '12.212.12.49'
-    },
-    timestamp: new Date,
-    channel: 'server'
-  }, options || {}));
-};
-
-/**
- * Create a group call merged from `options`
- *
- * @param {Object} options
- * @return {Group}
- */
-
-exports.group = function(options){
-  return new facade.Group(merge({
-    groupId: groupId,
-    userId: firstId,
-    traits: {
-      email: email,
-      name: 'Segment.io',
-      state: 'CA',
-      city: 'San Francisco',
-      created: new Date('2/1/2014'),
-      plan: 'Enterprise',
-    },
-    context: {
-      ip: '12.212.12.49'
-    },
-    timestamp: new Date,
-    channel: 'server'
-  }, options || {}));
-};
-
-/**
- * Create an alias call merged from `options`
- *
- * @param {Object} options
- * @return {Alias}
- */
-
-exports.alias = function (options) {
-  return new facade.Alias(merge({
-    from      : firstId,
-    to        : secondId,
-    channel   : 'server',
-    timestamp : new Date()
-  }, options || {}));
 };

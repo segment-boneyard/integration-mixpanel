@@ -15,7 +15,8 @@ describe('Mixpanel', function(){
       apiKey: 'c31daa4f214e00452a9658cadc5ef6de',
       secret: '2692184e7c7a4d9a005b12cf4b9fb22c',
       token: '50912cd33fd82225ab5ae1c563bd5a7e',
-      people: true
+      people: true,
+      setAllTraitsByDefault: true
     };
     mixpanel = new Mixpanel(settings);
     test = Test(mixpanel, __dirname);
@@ -124,6 +125,18 @@ describe('Mixpanel', function(){
         .identify({})
         .error('$distinct_id, missing or empty', done);
     });
+
+    it('should filter to peopleProperties setting when setAllTraitsByDefault is false', function(done){
+      var identify = updateFixtureTimestamp(test.fixture('identify-filter-properties'));
+      test
+        .set({ setAllTraitsByDefault: false })
+        .set({ peopleProperties: [ '$first_name', 'met', '$created', '$email', 'id' ] })
+        .identify(identify.input)
+        .query({ ip: 0, verbose: 1 })
+        .query('data', identify.output, decode)
+        .requests(1)
+        .expects(200, done);
+    })
   });
 
   describe('.track()', function(){
@@ -138,19 +151,15 @@ describe('Mixpanel', function(){
         .query({ api_key: settings.apiKey })
         .query({ verbose: '1' })
         .query('data', json.output, decode)
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(1, res.length);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .requests(1)
+        .expects(200, done);
     });
 
     it('should send revenue correctly', function(done){
       var json = test.fixture('track-revenue');
       var timestamp = json.input.timestamp = new Date();
       json.output.$append.$transactions.$time = timestamp.toISOString().slice(0,19);
-      
+
       var suite = test
         .requests(2) // total number of requests
         .set(settings)
@@ -162,18 +171,14 @@ describe('Mixpanel', function(){
         .query({ verbose: '1' })
         .query({ ip: '0' })
         .query('data', json.output, decode)
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should not send last seen with revenue if active flag is false', function(done){
       var json = test.fixture('track-ignore-time-with-revenue');
       var timestamp = json.input.timestamp = new Date();
       json.output.$append.$transactions.$time = timestamp.toISOString().slice(0,19);
-      
+
       var suite = test
         .requests(2) // total number of requests
         .set(settings)
@@ -185,11 +190,7 @@ describe('Mixpanel', function(){
         .query({ verbose: '1' })
         .query({ ip: '0' })
         .query('data', json.output, decode)
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should send track with context correctly', function(done){
@@ -201,12 +202,21 @@ describe('Mixpanel', function(){
         .query({ api_key: settings.apiKey })
         .query({ verbose: '1' })
         .query('data', json.output, decode)
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(1, res.length);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .requests(1)
+        .expects(200, done);
+    });
+
+    it('should send track with only browser context correctly', function(done){
+      var json = test.fixture('track-context-browser');
+      test
+        .set(settings)
+        .set({ people: false })
+        .track(json.input)
+        .query({ api_key: settings.apiKey })
+        .query({ verbose: '1' })
+        .query('data', json.output, decode)
+        .requests(1)
+        .expects(200, done);
     });
 
     // TODO: why are these tests not checking output payload?
@@ -269,11 +279,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track categorized pages', function(done){
@@ -285,11 +291,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track categorized pages with consolidated names', function(done){
@@ -301,11 +303,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track named pages', function(done){
@@ -317,11 +315,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track named pages with the consolidated page name', function(done){
@@ -333,11 +327,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should not send any requests for disabled pages', function(done){
@@ -349,11 +339,8 @@ describe('Mixpanel', function(){
         trackAllPages: false
        })
        .page(json.input)
-       .end(function(err, res){
-          if (err) return done(err);
-          assert(test.reqs.length == 0);
-          done();
-       });
+       .requests(0)
+       .end(done);
     })
   });
 
@@ -367,11 +354,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track categorized screen', function(done){
@@ -383,11 +366,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track categorized screens with consolidated names', function(done){
@@ -399,11 +378,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track named screen', function(done){
@@ -415,11 +390,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should be able to track named screens with the consolidated screen name', function(done){
@@ -431,11 +402,7 @@ describe('Mixpanel', function(){
         .query('data', json.output, decode)
         .query('api_key', settings.apiKey)
         .query('verbose', '1')
-        .end(function(err, res){
-          if (err) return done(err);
-          assert.equal(200, res[0].status);
-          done();
-        });
+        .expects(200, done);
     });
 
     it('should not send any requests for disabled screens', function(done){
@@ -447,11 +414,8 @@ describe('Mixpanel', function(){
         trackAllPages: false
        })
        .page(json.input)
-       .end(function(err, res){
-          if (err) return done(err);
-          assert(test.reqs.length == 0);
-          done();
-       });
+       .requests(0)
+       .end(done);
     })
   });
 });
