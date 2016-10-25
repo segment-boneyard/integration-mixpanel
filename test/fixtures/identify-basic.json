@@ -5,8 +5,7 @@
     "timestamp": "XXX_GETS_OVERRIDDEN: See spec for details",
     "traits": {
       "company": "Example",
-      "firstName": "han",
-      "lastName": "kim",
+      "name": "han kim",
       "met": "2014-01-01",
       "created": "2013-01-01",
       "phone": "555555",
@@ -25,6 +24,7 @@
       "company": "Example",
       "$first_name": "han",
       "$last_name": "kim",
+      "$name": "han kim",
       "met": "2014-01-01T00:00:00.000Z",
       "$created": "2013-01-01T00:00:00",
       "$phone": "555555",
