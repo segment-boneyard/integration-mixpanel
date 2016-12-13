@@ -150,7 +150,7 @@ describe('Mixpanel', function(){
       var json = test.fixture('track-revenue');
       var timestamp = json.input.timestamp = new Date();
       json.output.$append.$transactions.$time = timestamp.toISOString().slice(0,19);
-      
+
       var suite = test
         .requests(2) // total number of requests
         .set(settings)
@@ -173,7 +173,7 @@ describe('Mixpanel', function(){
       var json = test.fixture('track-ignore-time-with-revenue');
       var timestamp = json.input.timestamp = new Date();
       json.output.$append.$transactions.$time = timestamp.toISOString().slice(0,19);
-      
+
       var suite = test
         .requests(2) // total number of requests
         .set(settings)
@@ -208,6 +208,24 @@ describe('Mixpanel', function(){
           done();
         });
     });
+
+    it('should send track with referrer correctly', function(done){
+      var json = test.fixture('track-referrer');
+      test
+        .set(settings)
+        .set({ people: false })
+        .track(json.input)
+        .query({ api_key: settings.apiKey })
+        .query({ verbose: '1' })
+        .query('data', json.output, decode)
+        .end(function(err, res){
+          if (err) return done(err);
+          assert.equal(1, res.length);
+          assert.equal(200, res[0].status);
+          done();
+        });
+    });
+
 
     // TODO: why are these tests not checking output payload?
     it('should be able to track correctly', function(done){
