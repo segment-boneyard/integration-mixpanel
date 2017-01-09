@@ -1,7 +1,18 @@
-2.0.0 / 2016-06-09
-===================
 
-  * versioned integration
+1.0.22 / 2016-12-12
+==================
+
+  * Fix $referrer, $username, and $search_engine 
+
+1.0.21 / 2016-10-25
+==================
+
+  * Re-add $name for client side parity 
+
+1.0.20 / 2016-07-06
+==================
+
+  * allow bypassing of last seen when tracking revenue
 
 1.0.19 / 2016-05-12
 ===================

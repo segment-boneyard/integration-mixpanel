@@ -1,0 +1,29 @@
+{
+  "input": {
+    "type": "track",
+    "userId": "999999",
+    "event": "Purchased a lambo",
+    "timestamp": "2014",
+    "properties": {
+      "revenue": 17.38
+    },
+    "context": {
+      "ip": "10.0.0.1",
+      "active": false
+    }
+  },
+  "output": {
+    "$ip": "10.0.0.1",
+    "$append": {
+      "$transactions": {
+        "$time": 1388534400,
+        "$amount": 17.38
+      } 
+    },
+    "$token": "50912cd33fd82225ab5ae1c563bd5a7e",
+    "$distinct_id": "999999",
+    "$ignore_time": true 
+  }
+}
+
+

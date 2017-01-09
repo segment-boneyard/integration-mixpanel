@@ -28,6 +28,7 @@
       "company": "Example",
       "$first_name": "Lucius",
       "$last_name": "Severus",
+      "$name": "Lucius Severus",
       "met": "2014-01-01T00:00:00.000Z",
       "$created": "2013-01-01T00:00:00",
       "$phone": "555555",

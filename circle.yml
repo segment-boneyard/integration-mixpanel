@@ -6,16 +6,19 @@ machine:
   python:
     version: 2.7.3
   services:
-    - redis
     - docker
+    - redis
 
 dependencies:
   pre:
-   - pip install awscli
+   - npm -g install npm@2
 
 deployment:
   push:
    branch: master
    commands:
-    - curl -sLu "$HTTP_AUTH:" $BUILD | sh
-
+    - curl -sLu "$HTTP_AUTH:" $BUILD | bash
+  push_tags:
+   tag: /[0-9]+\.[0-9]+\.[0-9]+/
+   commands:
+    - curl -sLu "$HTTP_AUTH:" $BUILD | bash
