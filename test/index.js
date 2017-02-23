@@ -124,6 +124,20 @@ describe('Mixpanel', function(){
         .identify({})
         .error('$distinct_id, missing or empty', done);
     });
+
+    it('should send identify with context correctly', function(done){
+      var json = updateFixtureTimestamp(test.fixture('identify-context'));
+
+      //Test if the context settings have come through properly.
+      test
+        .set(settings)
+        .identify(json.input)
+        .query({ ip: 0, verbose: 1 })
+        .query('data', json.output, decode)
+        .expects(200)
+        //What does the query need to do and check here?
+        .end(done);
+    });
   });
 
   describe('.track()', function(){
