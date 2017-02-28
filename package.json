@@ -1,6 +1,6 @@
 {
   "name": "integration-mixpanel",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "integration-version": "2016-06-09",
   "private": true,
   "description": "Mixpanel server-side integration",
