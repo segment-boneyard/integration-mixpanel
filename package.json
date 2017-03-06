@@ -2,7 +2,6 @@
   "name": "@segment/integration-mixpanel",
   "version": "3.1.1",
   "integration-version": "2016-06-09",
-  
   "description": "Mixpanel server-side integration",
   "author": "Segment <friends@segment.com>",
   "repository": {
