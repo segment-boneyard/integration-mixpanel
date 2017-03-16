@@ -1,6 +1,6 @@
 {
   "name": "@segment/integration-mixpanel",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Mixpanel server-side integration",
   "author": "Segment <friends@segment.com>",
   "repository": {
@@ -37,6 +37,7 @@
     "segmentio-facade": "2.x",
     "segmentio-integration-tester": "1.x",
     "should": "4.x",
-    "uid": "0.0.2"
+    "uid": "0.0.2",
+    "uuid": "^3.0.1"
   }
 }
