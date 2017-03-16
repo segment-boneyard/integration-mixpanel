@@ -1,0 +1,35 @@
+{
+  "input": {
+    "type": "identify",
+    "userId": "user-id",
+    "timestamp": "XXX_GETS_OVERRIDDEN: See spec for details",
+    "traits": {
+      "company": "Example",
+      "firstName": "han",
+      "lastName": "kim",
+      "met": "2014-01-01",
+      "created": "2013-01-01",
+      "phone": "555555",
+      "email": "jd@example.com",
+      "trait": "some-trait"
+    },
+    "context": {
+      "ip": "0.0.0.0"
+    }
+  },
+  "output": {
+    "$distinct_id": "user-id",
+    "$token": "50912cd33fd82225ab5ae1c563bd5a7e",
+    "$time": "XXX_GETS_OVERRIDDEN: See spec for details",
+    "$set": {
+      "$first_name": "han",
+      "met": "2014-01-01T00:00:00.000Z",
+      "$created": "2013-01-01T00:00:00",
+      "$email": "jd@example.com",
+      "id": "user-id"
+    },
+    "$ip": "0.0.0.0",
+    "$ignore_time": false,
+    "mp_lib": "Segment: unknown"
+  }
+}
