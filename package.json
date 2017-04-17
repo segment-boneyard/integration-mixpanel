@@ -1,6 +1,6 @@
 {
   "name": "@segment/integration-mixpanel",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Mixpanel server-side integration",
   "author": "Segment <friends@segment.com>",
   "repository": {
